@@ -116,6 +116,53 @@ function themeibp_init()
     ]);
 }
 
+//Ajout de plusieurs customs fields pour les customs posts
+function themeibp_add_custom_box()
+{
+    add_meta_box('themeibp_rate', 'Détails', 'themeibp_render_box', 'film');
+}
+
+//Ajout du formulaire des customs fields
+function themeibp_render_box($post)
+{
+?>
+    <?php
+    $fieldRate = get_post_meta(get_the_ID(), 'themeibp_rate', true);
+    $fieldDirector = get_post_meta(get_the_ID(), 'themeibp_director', true);
+    $fieldActor = get_post_meta(get_the_ID(), 'themeibp_actor', true);
+    ?>
+
+    <label for="themeibp_rate">Note du film</label></br>
+    <input type="text" name="themeibp_rate" value="<?= ($fieldRate === null) ? '' : $fieldRate; ?>">
+    </br></br>
+
+    <label for="themeibp_director">Réalisateur(s) du film</label></br>
+    <input type="text" name="themeibp_director" value="<?= ($fieldDirector === null) ? '' :  $fieldDirector ?>">
+    </br></br>
+
+    <label for="themeibp_actor">Acteur(s) du film</label></br>
+    <input type="text" name="themeibp_actor" value="<?= ($fieldActor === null) ? '' :  $fieldActor ?>">
+
+<?php
+}
+
+//Modifie ou ajoute les données des customs fields
+function themeibp_save_meta($post_id)
+{
+    if (array_key_exists('themeibp_rate', $_POST)) {
+
+        if ($_POST['themeibp_rate']) {
+            update_post_meta($post_id, 'themeibp_rate', $_POST['themeibp_rate']);
+        }
+        if ($_POST['themeibp_director']) {
+            update_post_meta($post_id, 'themeibp_director', $_POST['themeibp_director']);
+        }
+        if ($_POST['themeibp_actor']) {
+            update_post_meta($post_id, 'themeibp_actor', $_POST['themeibp_actor']);
+        }
+    }
+}
+
 //Action ou filtre pour les différents hooks
 add_action('init', 'themeibp_init');
 
@@ -123,3 +170,6 @@ add_action('wp_enqueue_scripts', 'themeibp_register_assets');
 add_action('after_setup_theme', 'themeibp_supports');
 
 add_filter('document_title_separator', 'themeibp_title_separator');
+
+add_action('add_meta_boxes', 'themeibp_add_custom_box');
+add_action('save_post', 'themeibp_save_meta');

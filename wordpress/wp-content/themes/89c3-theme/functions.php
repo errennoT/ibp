@@ -188,7 +188,6 @@ function themeibp_wp_title_for_not_home($title)
 
 //Action ou filtre pour les différents hooks
 add_action('init', 'themeibp_init');
-
 add_action('wp_enqueue_scripts', 'themeibp_register_assets');
 add_action('after_setup_theme', 'themeibp_supports');
 

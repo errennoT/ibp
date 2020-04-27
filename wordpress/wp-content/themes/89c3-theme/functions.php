@@ -41,9 +41,71 @@ function themeibp_title_separator()
     return "|";
 }
 
-//Ajout d'un custom post
+//Application d'un filtre dans la pagination
+function themeibp_pagination()
+{
+    $pages = paginate_links(
+        [
+            'type' => 'array',
+            'prev_text' => __('&laquo; Précédent'),
+            'next_text' => __('Suivant &raquo;'),
+        ]
+    );
+    if ($pages === null) {
+        return;
+    }
+    echo '<nav class="pgn">';
+    echo '<ul>';
+    foreach ($pages as $page) {
+        echo '<li>';
+        echo str_replace('page-numbers', 'pgn__num', $page);
+        echo '</li>';
+    }
+    echo '</ul>';
+    echo '</nav>';
+}
+
+//Ajout des taxonomies genre et nationalite + ajout d'un custom post
 function themeibp_init()
 {
+    register_taxonomy('genre', 'film', [
+        'labels' => [
+            'name' => 'Genre',
+            'singular_name'     => 'Genre',
+            'plural_name'       => 'Genres',
+            'search_items'      => 'Rechercher des genres',
+            'all_items'         => 'Tous les genres',
+            'edit_item'         => 'Editer le genre',
+            'update_item'       => 'Mettre à jour le genre',
+            'add_new_item'      => 'Ajouter un nouveau genre',
+            'new_item_name'     => 'Ajouter un nouveau genre',
+            'menu_name'         => 'Genre',
+        ],
+        'public' => true,
+        'show_in_rest' => true,
+        'hierarchical' => true,
+        'show_admin_column' => true,
+    ]);
+
+    register_taxonomy('nationalite', 'film', [
+        'labels' => [
+            'name' => 'Nationalité',
+            'singular_name'     => 'Nationalité',
+            'plural_name'       => 'Nationalités',
+            'search_items'      => 'Rechercher des nationalités',
+            'all_items'         => 'Tous les nationalités',
+            'edit_item'         => 'Editer le nationalité',
+            'update_item'       => 'Mettre à jour le nationalité',
+            'add_new_item'      => 'Ajouter un nouveau nationalité',
+            'new_item_name'     => 'Ajouter un nouveau nationalité',
+            'menu_name'         => 'Nationalité',
+        ],
+        'public' => true,
+        'show_in_rest' => true,
+        'hierarchical' => true,
+        'show_admin_column' => true,
+    ]);
+
     register_post_type('film', [
         'label' => 'Film',
         'public' => true,

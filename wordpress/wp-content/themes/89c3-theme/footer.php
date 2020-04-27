@@ -16,7 +16,11 @@
 
                 <h4>Information</h4>
 
-                
+                <?php wp_nav_menu([
+                        'theme_location' => 'footer',
+                        'container' => false,
+                        'menu_class' => 's-footer__linklist',
+                    ]); ?>
 
             </div> <!-- end s-footer__subscribe -->
 

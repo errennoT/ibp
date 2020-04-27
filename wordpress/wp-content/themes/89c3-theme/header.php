@@ -12,8 +12,6 @@
     ================================================== -->
     <section class="s-pageheader s-pageheader--home">
 
-
-
         <header class="header">
             <div class="header__content row">
 
@@ -39,6 +37,12 @@
                 <nav class="header__nav-wrap">
 
                     <h2 class="header__nav-heading h6">Site Navigation</h2>
+
+                    <?php wp_nav_menu([
+                        'theme_location' => 'header',
+                        'container' => false,
+                        'menu_class' => 'header__nav',
+                    ]); ?>
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
 

@@ -12,6 +12,8 @@
     ================================================== -->
     <section class="s-pageheader s-pageheader--home">
 
+    <h1 class="center_title"><?php esc_html(wp_title('')); ?></h1>
+    
         <header class="header">
             <div class="header__content row">
 

@@ -194,6 +194,7 @@ function themeibp_add_post_type_to_home($query)
     }
 }
 
+
 //Action ou filtre pour les différents hooks
 add_action('init', 'themeibp_init');
 
@@ -207,3 +208,8 @@ add_action('save_post', 'themeibp_save_meta');
 
 add_filter('wp_title', 'themeibp_wp_title_for_home');
 add_filter('wp_title', 'themeibp_wp_title_for_not_home');
+
+add_action('pre_get_posts', 'themeibp_add_post_type_to_home');
+
+require_once('options/footer.php');
+FooterOptions::register();

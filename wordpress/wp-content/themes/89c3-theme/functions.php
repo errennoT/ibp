@@ -186,6 +186,15 @@ function themeibp_wp_title_for_not_home($title)
     return $title;
 }
 
+//Ajoute à la home les customs posts
+function themeibp_add_post_type_to_home($query)
+{
+    if ($query->is_main_query() && $query->is_home()) {
+        $query->set('post_type', array('film'));
+    }
+}
+
+
 //Action ou filtre pour les différents hooks
 add_action('init', 'themeibp_init');
 add_action('wp_enqueue_scripts', 'themeibp_register_assets');
@@ -198,3 +207,8 @@ add_action('save_post', 'themeibp_save_meta');
 
 add_filter('wp_title', 'themeibp_wp_title_for_home');
 add_filter('wp_title', 'themeibp_wp_title_for_not_home');
+
+add_action('pre_get_posts', 'themeibp_add_post_type_to_home');
+
+require_once('options/footer.php');
+FooterOptions::register();

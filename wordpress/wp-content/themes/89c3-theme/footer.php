@@ -9,6 +9,11 @@
 
                 <h4>Quick Links</h4>
 
+                <?php wp_nav_menu([
+                        'theme_location' => 'footer',
+                        'container' => false,
+                        'menu_class' => 's-footer__linklist',
+                    ]); ?>
             </div> <!-- end s-footer__sitelinks -->
 
 
@@ -16,11 +21,7 @@
 
                 <h4>Information</h4>
 
-                <?php wp_nav_menu([
-                        'theme_location' => 'footer',
-                        'container' => false,
-                        'menu_class' => 's-footer__linklist',
-                    ]); ?>
+                <p><?= esc_html(get_option('description')) ?> </p>
 
             </div> <!-- end s-footer__subscribe -->
 
@@ -31,7 +32,7 @@
         <div class="row">
             <div class="col-full">
                 <div class="s-footer__copyright">
-                    
+                    <span><?= esc_html(get_option('copyright')) ?></span>
                 </div>
 
                 <div class="go-top">

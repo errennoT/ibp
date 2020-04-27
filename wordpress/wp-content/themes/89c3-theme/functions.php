@@ -41,6 +41,20 @@ function themeibp_title_separator()
     return "|";
 }
 
+function themeibp_init()
+{
+    register_post_type('film', [
+        'label' => 'Film',
+        'public' => true,
+        'menu_position' => 3,
+        'menu_icon' => 'dashicons-plus',
+        'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
+        'has_archive' => true,
+    ]);
+}
+
+//Action ou filtre pour les différents hooks
+add_action('init', 'themeibp_init');
 add_action('wp_enqueue_scripts', 'themeibp_register_assets');
 add_action('after_setup_theme', 'themeibp_supports');
 

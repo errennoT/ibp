@@ -41,7 +41,6 @@ function themeibp_title_separator()
     return "|";
 }
 
-//Ajout d'un custom post
 function themeibp_init()
 {
     register_post_type('film', [
@@ -56,7 +55,6 @@ function themeibp_init()
 
 //Action ou filtre pour les différents hooks
 add_action('init', 'themeibp_init');
-
 add_action('wp_enqueue_scripts', 'themeibp_register_assets');
 add_action('after_setup_theme', 'themeibp_supports');
 

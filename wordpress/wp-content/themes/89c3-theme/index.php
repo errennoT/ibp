@@ -32,7 +32,7 @@
                 <?php endwhile;else : ?>
                 <p>Aucun film ;(</p>
             <?php endif; ?>
-            
+
         </div> <!-- end masonry -->
     </div> <!-- end masonry-wrap -->
 

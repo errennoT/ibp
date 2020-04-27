@@ -163,6 +163,29 @@ function themeibp_save_meta($post_id)
     }
 }
 
+//Ajout du titre dans la page d'accueil
+function themeibp_wp_title_for_home($title)
+{
+    if (empty($title) && (is_home())) {
+        $title = __('Bienvenue sur l\'exercice d\'IBP', 'textdomain');
+    }
+    return $title;
+}
+
+//Suppression du nom de la taxonomy dans le titre
+function themeibp_wp_title_for_not_home($title)
+{
+    $queried_object = get_queried_object();
+    $nameTaxonomy = $queried_object->name;
+
+    if (!is_home() && $nameTaxonomy !== '') {
+
+        $title = __($nameTaxonomy, 'textdomain');
+    }
+
+    return $title;
+}
+
 //Action ou filtre pour les différents hooks
 add_action('init', 'themeibp_init');
 
@@ -173,3 +196,6 @@ add_filter('document_title_separator', 'themeibp_title_separator');
 
 add_action('add_meta_boxes', 'themeibp_add_custom_box');
 add_action('save_post', 'themeibp_save_meta');
+
+add_filter('wp_title', 'themeibp_wp_title_for_home');
+add_filter('wp_title', 'themeibp_wp_title_for_not_home');

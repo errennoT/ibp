@@ -186,6 +186,14 @@ function themeibp_wp_title_for_not_home($title)
     return $title;
 }
 
+//Ajoute à la home les customs posts
+function themeibp_add_post_type_to_home($query)
+{
+    if ($query->is_main_query() && $query->is_home()) {
+        $query->set('post_type', array('film'));
+    }
+}
+
 //Action ou filtre pour les différents hooks
 add_action('init', 'themeibp_init');
 

@@ -1,5 +1,13 @@
 <?php
 
+//Ajoute les fonctionnalités au thème
+function themeibp_supports()
+{
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_image_size('card', 450, 600, true);
+}
+
 //Charge le JS et le CSS
 function themeibp_register_assets()
 {
@@ -24,4 +32,13 @@ function themeibp_register_assets()
     wp_enqueue_script('main');
 }
 
+//Application d'un filtre au titre
+function themeibp_title_separator()
+{
+    return "|";
+}
+
 add_action('wp_enqueue_scripts', 'themeibp_register_assets');
+add_action('after_setup_theme', 'themeibp_supports');
+
+add_filter('document_title_separator', 'themeibp_title_separator');
